@@ -20,6 +20,21 @@ GPIO.setup(left_backward, GPIO.OUT)
 GPIO.setup(right_forward, GPIO.OUT)
 GPIO.setup(right_backward, GPIO.OUT)
 
+def left(x):
+    GPIO.output(left_backward, GPIO.HIGH)
+    GPIO.output(right_forward, GPIO.HIGH)
+    print("Moving Left")
+    time.sleep(x)
+    GPIO.output(left_backward, GPIO.LOW)
+    GPIO.output(right_forward, GPIO.LOW)
+
+ def right(x):
+    GPIO.output(right_backward, GPIO.HIGH)
+    GPIO.output(left_forward, GPIO.HIGH)
+    print("Moving Right")
+    time.sleep(x)
+    GPIO.output(right_backward, GPIO.LOW)
+    GPIO.output(left_forward, GPIO.LOW)
 
 def forward(x):
     GPIO.output(left_forward, GPIO.HIGH)
@@ -60,8 +75,13 @@ def test_pwm():
 
 
 while 1:
-    # forward(1)
-    # reverse(1)
-    test_pwm()
+    forward(1)
+    reverse(1)
+    left(0.5)
+    forward(1)
+    reverse(1)
+    right(0.5)
+
+    #test_pwm()
     GPIO.cleanup()
     break
